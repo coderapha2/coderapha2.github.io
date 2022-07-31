@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "nome": "Produto 1",
+    "valor": 7478,
+    "url": "https://i.picsum.photos/id/1042/300/300.jpg?hmac=ZsXTC7SJEqoeBaG83Ec52Q65QRGZ0gf4sNZj7r8UkHc"
+  },
+  {
+    "id": 2,
+    "nome": "Produto 2",
+    "valor": 455.55,
+    "url": "https://i.picsum.photos/id/50/300/300.jpg?hmac=OWBcjk58-GZvJc5dEq9oADDWwuAz2_wxk-MXZ37GRHs"
+  },
+  {
+    "id": 3,
+    "nome": "Produto 3",
+    "valor": 4344,
+    "url": "https://i.picsum.photos/id/499/300/300.jpg?hmac=_17GOmNyiHbgx18qRDftuPQVoTxOondFpDREPQBtpxA"
+  },
+  {
+    "id": 4,
+    "nome": "Produto 4",
+    "valor": 45454,
+    "url": "https://i.picsum.photos/id/85/300/300.jpg?hmac=emFuzjW8UJpRo790pxmm5MCdvX6PvnGGCYYeS4mslsg"
+  },
+  {
+    "id": 5,
+    "nome": "Produto 5",
+    "valor": 6565,
+    "url": "https://i.picsum.photos/id/115/300/300.jpg?hmac=gY7B3K-tWxwToJBi9ANfTFIPDnU62kR7gsClk0Tfo2U"
+  },
+  {
+    "id": 6,
+    "nome": "Produto 6",
+    "valor": 3344,
+    "url": "https://i.picsum.photos/id/395/300/300.jpg?hmac=bNoTNUbPM5V9l39XVyBAGaTgCPlbuwxUq5BWkrGT7CQ"
+  },
+  {
+    "id": 7,
+    "nome": "Produto 7",
+    "valor": 100,
+    "url": "https://i.picsum.photos/id/950/300/300.jpg?hmac=laPJPPzM838iXTVTc14TW-KQEpJ3omkZKo25_Z51PvM"
+  },
+  {
+    "id": 8,
+    "nome": "Produto 8",
+    "valor": 4443,
+    "url": "https://i.picsum.photos/id/43/300/300.jpg?hmac=Sm3OKu2moFYAaBOpd9SmwpJSwp54NijrGe-PZXNMBmc"
+  },
+  {
+    "id": 9,
+    "nome": "Produto 9",
+    "valor": 232,
+    "url": "https://i.picsum.photos/id/118/300/300.jpg?hmac=y5ogOME73iMgH2ExOcgp4s7H59GHjryoeyqvOwb0oeY"
+  },
+  {
+    "id": 10,
+    "nome": "Produto 10",
+    "valor": 443,
+    "url": "https://i.picsum.photos/id/69/300/300.jpg?hmac=buudc8P9vZhMxhg_v0JHsOu7xGdf6Qj8pOH2O1Rdak8"
+  }
+]

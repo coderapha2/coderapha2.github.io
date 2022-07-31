@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #1abc9c;
+  --color-blue-dark: #34495e;
+  --color-blue-darker: #2c3e50;
+}
+
+body {
+  padding: 2rem;
+  font-family: Helvetica, Sans-Serif;
+  min-height: 100vh;
+  background-color: var(--color-blue-darker);
+  color: #fff;
+}
+
+
+.menu a{
+  color: #fff;
+  text-decoration: none;
+  transition: all .3s;
+}
+
+.menu a:hover,
+.menu a.active {
+  color: var(--primary-color)
+}
+
+#app, #favoritos {
+  margin: 1rem auto;
+  gap: 1em;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+}
+
+.card {
+  padding: 1em;
+  background-color: var(--color-blue-dark);
+  text-align: center;
+  border-radius: 20px;
+}
+
+#favoritos .card {
+  width: 100%;
+  height: 200px;
+  margin: 1em 0;
+}
+
+#favoritos .card .card-items {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+#favoritos img {
+  width: 100px;
+}
+
+.card_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card_header button {
+  background: none;
+  border: none;
+  outline: none;
+  color: yellow;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+
+.card-items img {
+  max-width: 80%;
+  margin: 1em 0;
+  border-radius: 50%;
+}
