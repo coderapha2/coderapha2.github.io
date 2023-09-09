@@ -1,2 +1,361 @@
-<h1>Raphael Cardoso</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://http2.mlstatic.com/frontend-assets/mp-web-navigation/ui-navigation/5.35.6/mercadopago/favicon.svg"
+      rel="icon"
+      data-head-react="true"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <meta name="theme-color" content="#009FE3" />
+    <title>Mercado Pago Brasil | Simulador de custos</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap");
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Open Sans", sans-serif;
+    }
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+    body {
+      background-color: #ededed;
+    }
+    .titulo {
+      padding: 1rem 0;
+      background-color: #009fe3;
+      color: #fff;
+      text-align: center;
+    }
+    .titulo .wrapper {
+      width: 90%;
+      margin: 0 auto;
+      display: flex;
+    }
+    .titulo .wrapper h3 {
+      flex: 1;
+    }
+    .tabs {
+      background-color: #fff;
+      display: flex;
+    }
+    button {
+      border: none;
+      outline: none;
+      appearance: none;
+      background: none;
+      width: 50%;
+      font-size: 1rem;
+      padding: 1rem 0;
+      color: #000;
+    }
+    input,
+    option,
+    select {
+      display: block;
+      background: none;
+      border: none;
+      outline: none;
+      appearance: none;
+    }
+    label {
+      font-size: 90%;
+      margin-bottom: 1.5rem;
+    }
+    select {
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem;
+      border: 1px solid gray;
+      border-radius: 0.8rem;
+      color: #000;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .ativo {
+      border-bottom: 2px solid #009fe3;
+    }
+    .box {
+      width: 90%;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: #fff;
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    }
+    .divValor {
+      text-align: center;
+      display: flex;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      border-bottom: 2px solid #009fe3;
+    }
 
+    .divValor .currency,
+    .divValor input {
+      font-weight: 300;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .divValor input {
+      width: 90%;
+      flex: 1;
+    }
+    .divValor input::placeholder {
+      color: #000;
+    }
+
+    .flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 1rem 0;
+    }
+
+    .hide {
+      display: none;
+    }
+  </style>
+  <body>
+    <div class="titulo">
+      <div class="wrapper">
+        <a href="https://www.mercadopago.com.br/"
+          ><span class="material-symbols-outlined"> arrow_back </span></a
+        >
+        <h3>Simulador de custos</h3>
+      </div>
+    </div>
+    <div class="tabs">
+      <button id="cobrar" class="ativo" onclick="selecionarTipo('cobrar')">
+        Cobrar
+      </button>
+      <button id="receber" onclick="selecionarTipo('receber')">Receber</button>
+    </div>
+
+    <div class="box">
+      <div class="divValor">
+        <span class="currency">R$</span>
+        <input
+          type="search"
+          name="numero"
+          id="numero"
+          inputmode="numeric"
+          pattern="[0-9]*"
+          oninput="formatarNumero(this)"
+          placeholder="0,00"
+        />
+      </div>
+      Quanto você quer <span id="tipo">cobrar</span>?
+    </div>
+
+    <div class="box">
+      <label for="tipomaquininha">Com o que você quer cobrar?</label>
+      <select name="tipomaquininha" id="tipomaquininha">
+        <option value="point">Maquininhas Point e Point Tap</option>
+      </select>
+
+      <label for="metodopagamento">Como seus clientes vão te pagar?</label>
+      <select name="metodopagamento" id="metodopagamento">
+        <option value="Cartão de Crédito">Cartão de Crédito</option>
+        <option value="Cartão de Débito">Cartão de Débito</option>
+      </select>
+
+      <label for="tipopagamento"
+        >Que tipo de pagamento você quer oferecer?</label
+      >
+      <select name="tipopagamento" id="tipopagamento">
+        <option value="a_vista">À vista</option>
+        <option value="vendedor" selected>Parcelado vendedor</option>
+      </select>
+
+      <label for="parcelamento">Em quantas vezes?</label>
+      <select name="parcelamento" id="parcelamento"></select>
+
+      <label for="quandoreceber">Quando você quer receber o dinheiro?</label>
+      <select name="quandoreceber" id="quandoreceber">
+        <option value="nahora">Na hora</option>
+      </select>
+    </div>
+
+    <div id="resultados" class="box hide">
+      <div class="flex">
+        <div><b id="acaoTexto">Se vender por</b></div>
+        <div>
+          <b>R$ <span id="valor"></span></b>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="flex">
+        <div>
+          <b id="acaoTexto2">Você recebe</b>
+        </div>
+        <div>
+          <b>R$ <span id="valorfinal"></span></b>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Função para remover a classe "hide" do terceiro box quando o input estiver preenchido
+      function mostrarResultado() {
+        var numeroInput = document.getElementById("numero");
+        var resultadosBox = document.getElementById("resultados");
+
+        if (numeroInput.value.trim() !== "") {
+          resultadosBox.classList.remove("hide");
+        } else {
+          resultadosBox.classList.add("hide");
+        }
+      }
+
+      // Adiciona um evento de escuta para o input com id "numero"
+      var numeroInput = document.getElementById("numero");
+      numeroInput.addEventListener("input", mostrarResultado);
+
+      // Chama a função inicialmente para verificar o estado inicial do input
+      mostrarResultado();
+
+      // Obtém a referência ao elemento select
+      var parcelamentoSelect = document.getElementById("parcelamento");
+
+      // Loop para adicionar as opções de parcelamento
+      for (var i = 2; i <= 12; i++) {
+        var option = document.createElement("option"); // Cria um elemento option
+        option.value = i; // Define o valor da opção
+        option.text = i + " parcelas"; // Define o texto da opção
+        parcelamentoSelect.appendChild(option); // Adiciona a opção ao select
+      }
+
+      // Função para selecionar o tipo e trocar a classe "ativo"
+      function selecionarTipo(tipo) {
+        // Remove a classe "ativo" de todos os botões
+        var buttons = document.querySelectorAll(".tabs button");
+        buttons.forEach(function (button) {
+          button.classList.remove("ativo");
+        });
+
+        // Adiciona a classe "ativo" ao botão clicado
+        var button = document.getElementById(tipo);
+        button.classList.add("ativo");
+
+        // Atualiza o texto no elemento com id "tipo"
+        var tipoElement = document.getElementById("tipo");
+        tipoElement.textContent = tipo;
+
+        // Atualiza o texto dos elementos com id "acaoTexto" e "acaoTexto2"
+        var acaoTexto = document.getElementById("acaoTexto");
+        var acaoTexto2 = document.getElementById("acaoTexto2");
+
+        if (tipo === "cobrar") {
+          acaoTexto.textContent = "Se vender por";
+          acaoTexto2.textContent = "Você recebe";
+        } else if (tipo === "receber") {
+          acaoTexto.textContent = "Para receber";
+          acaoTexto2.textContent = "Você deveria cobrar";
+        }
+      }
+
+      // Função para calcular os valores com base nas taxas
+      function calcularValores() {
+        // Obtém o valor inserido no input
+        var valorInserido = parseFloat(
+          document.getElementById("numero").value.replace(",", ".")
+        );
+
+        // Taxa de liberação
+        var taxaLiberacao = 5.31 / 100;
+
+        // Taxas de parcelamento
+        var taxaParcelamento = {
+          2: 4.59 / 100,
+          3: 5.97 / 100,
+          4: 7.33 / 100,
+          5: 8.66 / 100,
+          6: 9.96 / 100,
+          7: 11.24 / 100,
+          8: 12.5 / 100,
+          9: 13.73 / 100,
+          10: 14.93 / 100,
+          11: 16.12 / 100,
+          12: 17.28 / 100,
+        };
+
+        // Obtém o tipo selecionado (cobrar ou receber)
+        var tipoSelecionado = document.querySelector(".tabs .ativo").id;
+
+        // Obtém o número de parcelas selecionado
+        var parcelasSelecionadas = parseInt(
+          document.getElementById("parcelamento").value
+        );
+
+        // Calcula a taxa de parcelamento com base no número de parcelas
+        var taxaParcela = taxaParcelamento[parcelasSelecionadas];
+
+        // Calcula o valor com base no tipo selecionado
+        var valorCalculado = valorInserido;
+
+        if (tipoSelecionado === "cobrar") {
+          // Se "cobrar" está selecionado, subtrai as taxas do valor a receber
+          valorCalculado =
+            valorInserido -
+            (valorInserido * taxaLiberacao + valorInserido * taxaParcela);
+        } else if (tipoSelecionado === "receber") {
+          // Se "receber" está selecionado, adiciona a taxa mensal ao valor a cobrar
+          valorCalculado = valorInserido / (1 - taxaLiberacao - taxaParcela);
+        }
+
+        // Acrescenta 10 ao valor final
+        valorCalculado += 10;
+
+        // Exibe o valor calculado nos elementos correspondentes
+        document.getElementById("valor").textContent = valorInserido.toFixed(2);
+        document.getElementById("valorfinal").textContent =
+          valorCalculado.toFixed(2);
+      }
+
+      // Adiciona um evento de escuta para o input com id "numero"
+      var numeroInput = document.getElementById("numero");
+      numeroInput.addEventListener("input", calcularValores);
+
+      // Adiciona eventos de clique aos botões "cobrar" e "receber"
+      var cobrarButton = document.getElementById("cobrar");
+      var receberButton = document.getElementById("receber");
+
+      cobrarButton.addEventListener("click", function () {
+        selecionarTipo("cobrar");
+        calcularValores();
+      });
+
+      receberButton.addEventListener("click", function () {
+        selecionarTipo("receber");
+        calcularValores();
+      });
+
+      // Adiciona um evento de mudança ao select com id "parcelamento"
+      var parcelamentoSelect = document.getElementById("parcelamento");
+
+      parcelamentoSelect.addEventListener("change", function () {
+        calcularValores();
+      });
+
+      // Chama a função inicialmente para calcular com base no valor inicial do input
+      calcularValores();
+    </script>
+  </body>
+</html>
