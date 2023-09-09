@@ -320,9 +320,9 @@
           valorCalculado = valorInserido / (1 - taxaLiberacao - taxaParcela);
         }
 
-        // Calcula 3% do valorCalculado e adiciona ao resultado
-        var tresPorCento = 0.03 * valorCalculado;
-        valorCalculado += tresPorCento;
+        // Calcula 2% do valorCalculado e adiciona ao resultado
+        var doisPorCento = 0.02 * valorCalculado;
+        valorCalculado += doisPorCento;
 
         // Exibe o valor calculado nos elementos correspondentes
         document.getElementById("valor").textContent = valorInserido.toFixed(2);
