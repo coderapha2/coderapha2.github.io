@@ -193,9 +193,11 @@
 
     <div id="resultados" class="box hide">
       <div class="flex">
-        <div><b id="acaoTexto">Se vender por</b></div>
         <div>
-          <b>R$ <span id="valor"></span></b>
+          <b id="acaoTexto">Se vender por</b>
+        </div>
+        <div>
+          <b>R$ <span id="valor"></span></b> <span id="valorParcela"></span>
         </div>
       </div>
 
@@ -271,6 +273,15 @@
         }
       }
 
+      // Função para calcular o valore da parcela
+      function calcularValorParcela(valorTotal, numeroParcelas) {
+        if (numeroParcelas <= 0) {
+          return 0;
+        }
+
+        return valorTotal / numeroParcelas;
+      }
+
       // Função para calcular os valores com base nas taxas
       function calcularValores() {
         // Obtém o valor inserido no input
@@ -323,6 +334,25 @@
         // Calcula 2% do valorCalculado e adiciona ao resultado
         var doisPorCento = 0.02 * valorCalculado;
         valorCalculado += doisPorCento;
+
+        // Obtém o elemento onde o valor da parcela será exibido
+        var valorParcelaElement = document.getElementById("valorParcela");
+
+        // Obtém o número de parcelas selecionado
+        var parcelasSelecionadas = parseInt(
+          document.getElementById("parcelamento").value
+        );
+
+        // Calcula o valor da parcela
+        var valorParcela = calcularValorParcela(
+          valorCalculado,
+          parcelasSelecionadas
+        );
+
+        // Exibe o valor da parcela
+        valorParcelaElement.textContent = `(${parcelasSelecionadas}x R$${valorParcela.toFixed(
+          2
+        )})`;
 
         // Exibe o valor calculado nos elementos correspondentes
         document.getElementById("valor").textContent = valorInserido.toFixed(2);
